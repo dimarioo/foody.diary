@@ -7,6 +7,7 @@ const bcrypt = require('bcrypt')
 const salt = bcrypt.genSaltSync(10)
 const secret = 'asdjhbgyfgwb'
 const jwt = require('jsonwebtoken')
+const cookieParser = require('cookie-parser')
 
 const app = express ()
 
@@ -14,12 +15,13 @@ const app = express ()
 
 app.use(cors({credentials:true, origin: 'http://localhost:3000'}));
 app.use(express.json())
+app.use(cookieParser())
 
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true, 
     useUnifiedTopology: true
   })
-app.post('/signup', async (req,res) =>{
+app.post('/signup', async (req,res) => {
     const {username, password} = req.body
     try{
         const userDoc = await User.create({username, password:bcrypt.hashSync(password,salt)})
@@ -27,7 +29,7 @@ app.post('/signup', async (req,res) =>{
     }catch(e){
         res.status(400).json(e)
     }
-
+})
 app.post('/login', async (req, res) => {
     const {username, password} = req.body
     const userDoc = await User.findOne({username})
@@ -43,8 +45,19 @@ app.post('/login', async (req, res) => {
     } 
       
 })
-    
-} )
+
+app.get('/profile', (req,res) =>  {
+    const {token} = req.cookies;
+    jwt.verify(token, secret, {}, (err,info) => {
+        if (err) throw err;
+        res.json(info)
+    })
+    res.json(req.cookies)  
+})
+
+app.post('/logout', (req,res) => {
+    res.cookie('token', '').json('ok')
+})
 
 
 app.listen(3001)
