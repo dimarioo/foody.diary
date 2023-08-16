@@ -3,11 +3,15 @@ const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const User = require('./Models/User')
+const Post = require('./Models/Post')
 const bcrypt = require('bcrypt')
 const salt = bcrypt.genSaltSync(10)
 const secret = 'asdjhbgyfgwb'
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
+const multer = require('multer')
+const uploadMiddleware = multer({dest: './Uploads'})
+const fs = require('fs')
 
 const app = express ()
 
@@ -38,7 +42,10 @@ app.post('/login', async (req, res) => {
         //logged in 
         jwt.sign({username,id:userDoc._id}, secret, {}, (err,token) => {
             if (err) throw err
-            res.cookie('token',token).json('ok')
+            res.cookie('token',token).json({
+                id:userDoc._id,
+                username
+            })
         })
     }   else{
         res.status(400).json('Invalid Credentials')
@@ -57,6 +64,15 @@ app.get('/profile', (req,res) =>  {
 
 app.post('/logout', (req,res) => {
     res.cookie('token', '').json('ok')
+})
+
+app.post('/post', uploadMiddleware.single('file'), (req,res) => {
+    const {originalname, path} = req.file
+    const parts = originalname.split('.')
+    const ext = parts[parts.length - 1]
+    const newPath = path+'.' +ext
+    fs.renameSync(newPath)
+   
 })
 
 
