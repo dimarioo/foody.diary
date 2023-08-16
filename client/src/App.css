@@ -1,3 +1,7 @@
+*{
+  box-sizing: border-box;
+}
+
 body{
   color: black
 }
@@ -74,6 +78,36 @@ div.entry p.summary{
   margin: 10px 0;
   line-height: 1.4rem;
 
+}
+
+form.login ,form.signup{
+max-width: 400px;
+margin: 0 auto;
+}
+
+input{
+  display: block;
+  margin-bottom:5px;
+  width: 100%;
+  padding: 5px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  background-color: #eee;
+  
+}
+
+button{
+  width: 100%;
+  display: block;
+  background-color: #555;
+  border: 0;
+  color:white;
+  border-radius: 5px;
+  padding: 7px
+}
+
+form.login h1, form.signup h1{
+  text-align: center;
 }
 
 .App-logo {
