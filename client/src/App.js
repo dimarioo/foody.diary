@@ -1,5 +1,5 @@
 import './App.css';
-import Entry from './Components/Entry';
+import Post from './Components/Post';
 //import Header from './Components/Header';
 import {Route, Routes} from "react-router-dom"
 import Static from './Components/Static';
