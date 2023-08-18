@@ -1,3 +1,4 @@
+import { formatISO9075 } from "date-fns"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 
@@ -16,10 +17,11 @@ export default function PostPage(){
     if(!postInfo) return ''
  return(
     <div className="post-page">
-       <div className="image">
-        <img src={`http://localhost:3001/${postInfo.cover}`} alt=""/>
-       </div>
-       <h1>{postInfo.title}</h1>
+        {/* <h1>{postInfo.title}</h1> */}
+        {/* <time>{formatISO9075(new Date(postInfo.createdAt))}</time> */}
+        <div className="image">
+            <img src={`http://localhost:3001/${postInfo.cover}`} alt=""/>
+        </div>
        <div dangerouslySetInnerHTML={{__html:postInfo.content}}/>
     </div>
  )

@@ -115,6 +115,22 @@ form.login h1, form.signup h1{
   text-align: center;
 }
 
+div .post-page div.image{
+    max-height: 200px;
+    display: flex;
+    overflow: hidden;
+}
+
+div.post-page div.image img{
+    object-fit: contain;
+    object-position: center center;
+
+}
+
+div.post-page h1{
+  text-align: center;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
