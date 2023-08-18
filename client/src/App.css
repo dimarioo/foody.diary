@@ -58,7 +58,12 @@ div.entry{
 div.entry div.info h2{
   margin: 0;
   font-size: 1.8rem;
+  text-decoration: none;
 
+}
+div.entry div.info a{
+  text-decoration: none;
+  color: inherit;
 }
 div.entry p.userinfo{
   margin: 6px 0;
