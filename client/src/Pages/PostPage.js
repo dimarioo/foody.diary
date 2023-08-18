@@ -17,7 +17,7 @@ export default function PostPage(){
     if(!postInfo) return ''
  return(
     <div className="post-page">
-        {/* <h1>{postInfo.title}</h1> */}
+        <h1>{postInfo.title}</h1>
         {/* <time>{formatISO9075(new Date(postInfo.createdAt))}</time> */}
         <div className="image">
             <img src={`http://localhost:3001/${postInfo.cover}`} alt=""/>
