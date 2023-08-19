@@ -17,11 +17,11 @@ Node.js and npm (Node Package Manager) installed on your system.
 A modern web browser like Chrome, Firefox, or Safari. 
 
 Installation
-Clone this repository to your local machine:
+Clone this repository to your local machine
 
-Navigate to the project directory:
+Navigate to the project directory
 
-Install the required dependencies:
+Install the required dependencies
 
 User Registration and Login
 Start the application by running: npm start
