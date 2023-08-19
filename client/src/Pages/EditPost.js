@@ -23,28 +23,31 @@ export default function EditPost(){
         })
     }, [])
 
-    function updatePost(e){
+    async function updatePost(e){
         e.preventDefault()
         const data = new FormData()
         data.set('title', title)
-        data.set('summart', summary)
+        data.set('summary', summary)
         data.set('content', content)
+        data.set('id',id)
         if (files?.[0]){
             data.set('file', files?.[0])
         }
-        fetch('http://localhost:3001/post', {
+        const response = await fetch('http://localhost:3001/post', {
             method: 'PUT',
             body: data,
+            credentials: 'include',
+            
         })
+        if (response.ok){
          setRedirect(true)
 
+        }
     }
 
      if (redirect){
             return <Navigate to={'/post/'+id} />
         }
-
- 
         
         return(
         <form onSubmit={updatePost}>
